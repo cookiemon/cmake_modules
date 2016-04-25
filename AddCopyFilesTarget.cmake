@@ -4,10 +4,13 @@
 #
 # ::
 #
-#  add_copy_files(target [file1 [file2 [...] ] ])
+#  add_copy_files(target DESTINATION destdir FILES [file1 [file2 [...] ] ])
 #
 # Adds a target that copies the list of files to the output directory if they
 # do not exist or have been modified.
+#
+# DESTINATION - Directory to copy the files to.
+# FILES - Files to copy relative to CMAKE_CURRENT_SOURCE_DIR
 #
 #=============================================================================
 # Copyright 2016 Cookiemon <rhannek@gmx.de>
@@ -22,6 +25,7 @@
 
 include(CMakeParseArguments)
 
+#TODO: Windows compatibility
 function(add_copy_files target)
 	cmake_parse_arguments(add_copy_files "" "DESTINATION" "FILES" ${ARGN})
 	set(destdir "${CMAKE_BINARY_DIR}/${add_copy_files_DESTINATION}")
